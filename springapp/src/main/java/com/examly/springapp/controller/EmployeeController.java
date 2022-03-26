@@ -31,7 +31,7 @@ public class EmployeeController {
     }
   
     @GetMapping("/admin")
-    public List<EmployeeModel> getEmployeeDetails(@RequestParam(value="id", required = false) String id ){
+    public EmployeeModel getEmployeeDetails(@RequestParam(value="id", required = false) String id ){
         System.out.println("hi i am employee");
         return employeeService.getAllEmployees(id);
     }

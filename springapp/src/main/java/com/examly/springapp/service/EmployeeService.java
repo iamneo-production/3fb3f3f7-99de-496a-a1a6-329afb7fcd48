@@ -21,14 +21,14 @@ public class EmployeeService {
         this.routeRepository = routeRepository;
     }
 
-    public List<EmployeeModel> getAllEmployees(String id){
+    public EmployeeModel getAllEmployees(String id){
         System.out.println("id " + id);
        EmployeeModel employeeModel = new EmployeeModel() ;
        employeeModel.setId("1");
        employeeModel.setUserName("user");
 
        employeeRepository.save(employeeModel);
-       return employeeRepository.findById("1");
+       return employeeModel;
     }
 
     public void addEmployee(EmployeeModel employeeModel){

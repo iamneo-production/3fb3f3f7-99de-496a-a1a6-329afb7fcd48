@@ -39,7 +39,7 @@ public class RouteModel {
     }
     public String getEndPoint() {
         return endPoint;
-    }
+    } 
     public void setEndPoint(String endPoint) {
         this.endPoint = endPoint;
     }
@@ -49,6 +49,7 @@ public class RouteModel {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
     }
-    
+
+    public RouteModel(){}
     
 }

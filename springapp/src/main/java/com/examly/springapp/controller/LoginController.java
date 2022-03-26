@@ -63,7 +63,7 @@ public class LoginController {
     @GetMapping("/admin/getEmployee")
     public EmployeeModel getEmployeeDetails(@RequestParam(defaultValue = "1" ) String id ){
         System.out.println("hi i am employee");
-        return employeeService.getAllEmployees(id).get(0);
+        return employeeService.getAllEmployees(id);
     }
 
     @PostMapping("/admin/addRoutes")
