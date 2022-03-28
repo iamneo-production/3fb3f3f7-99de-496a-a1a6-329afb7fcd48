@@ -35,35 +35,23 @@ public class LoginController {
     }
   
     @GetMapping("/login")
-    public List<LoginModel> getAllUsers(@RequestParam(value="id", required = false) String id ){
+    public List<LoginModel> getAllUsers(){
         System.out.println("hi i am login");
-        // return loginService.getAllUsers(id);
-        return new ArrayList<>();
+        return loginService.getAllUsers();
+        // return new ArrayList<>();
     }
 
+    @CrossOrigin
     @PostMapping("/login")
-    public String verifyLogin(@RequestBody LoginModel loginModel){
+    public boolean verifyLogin(@RequestBody LoginModel loginModel){
         System.out.println("hi i am login post");
         return loginService.verifyLogin(loginModel);
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<String> verifyLogin(@RequestBody EmployeeModel employeeModel){
-        System.out.println("hi i am signup post");
-        employeeService.addEmployee(employeeModel);
-        return new ResponseEntity<String>("Hello World", HttpStatus.OK);
     }
 
     @PutMapping("/editCustomer")
     public CustomerModel verifyLogin(@RequestParam(value="customerId", required = false) String id, @RequestBody CustomerModel customerModel){
         System.out.println("hi i am customer put");
         return employeeService.updateCustomer(id,customerModel);
-    }
-    
-    @GetMapping("/admin/getEmployee")
-    public EmployeeModel getEmployeeDetails(@RequestParam(defaultValue = "1" ) String id ){
-        System.out.println("hi i am employee");
-        return employeeService.getAllEmployees(id);
     }
 
     @PostMapping("/admin/addRoutes")

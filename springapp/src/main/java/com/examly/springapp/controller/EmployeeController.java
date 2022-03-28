@@ -31,8 +31,39 @@ public class EmployeeController {
     }
   
     @GetMapping("/admin")
-    public EmployeeModel getEmployeeDetails(@RequestParam(value="id", required = false) String id ){
+    public List<EmployeeModel> getEmployeeDetails(){
         System.out.println("hi i am employee");
-        return employeeService.getAllEmployees(id);
+        return employeeService.getAllEmployees();
+    }
+
+    
+    @GetMapping("/admin/getEmployee")
+    public EmployeeModel getEmployeeById(@RequestParam(defaultValue = "1" ) String id ){
+        System.out.println("hi i am employee by id");
+        return employeeService.getEmployeeById(id);
+    }
+
+    @PutMapping("/admin/editEmployee")
+    public void editEmployeeById(@RequestBody EmployeeModel employeeModel){
+        System.out.println("hi i am employee by edit id");
+        employeeService.editEmployee(employeeModel);
+    }
+
+    @PutMapping("/admin/saveEmployee")
+    public void saveNewEmployee(@RequestBody EmployeeModel employeeModel){
+        System.out.println("hi i am employee by save id");
+        employeeService.saveEmployee(employeeModel);
+    }
+
+    @DeleteMapping("/admin/deleteEmployee")
+    public void deleteEmployeeById(@RequestParam String id ){
+        System.out.println("hi i am employee by delete id");
+        employeeService.deleteEmployeeById(id);
+    }
+
+    @PutMapping("/editCustomer/{id}")
+    public CustomerModel verifyLogin(@PathVariable String id, @RequestBody CustomerModel customerModel){
+        System.out.println("hi i am customer put");
+        return employeeService.updateCustomer(id,customerModel);
     }
 }

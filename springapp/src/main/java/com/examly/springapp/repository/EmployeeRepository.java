@@ -11,6 +11,7 @@ import java.util.*;
 public interface EmployeeRepository extends JpaRepository<EmployeeModel,Long> {
 
     List<EmployeeModel> findAll(); 
-    List<EmployeeModel> findById(String id);
+    EmployeeModel findEmployeeById(String id);
+    List<EmployeeModel> deleteEmployeeById(String id);
     EmployeeModel findByEmail(String email);
 }

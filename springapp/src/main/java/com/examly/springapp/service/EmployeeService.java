@@ -21,20 +21,43 @@ public class EmployeeService {
         this.routeRepository = routeRepository;
     }
 
-    public EmployeeModel getAllEmployees(String id){
+    public EmployeeModel getEmployeeById(String id){
         System.out.println("id " + id);
        EmployeeModel employeeModel = new EmployeeModel() ;
        employeeModel.setId("1");
        employeeModel.setUserName("user");
 
        employeeRepository.save(employeeModel);
+       employeeRepository.findEmployeeById(id);
        return employeeModel;
     }
 
+    public List<EmployeeModel> getAllEmployees(){
+     
+     return employeeRepository.findAll(); 
+  }
+
     public void addEmployee(EmployeeModel employeeModel){
-        
        employeeRepository.save(employeeModel);
     }
+
+    public void editEmployee(EmployeeModel employeeModel){
+      EmployeeModel employeeModel1 =  employeeRepository.findEmployeeById(employeeModel.getId());
+      employeeModel1.setMobileNumber(employeeModel.getMobileNumber());  
+      employeeModel1.setVehicleModel(employeeModel.getVehicleModel());
+      employeeModel1.setVehicleNumber(employeeModel.getVehicleNumber());
+
+      employeeRepository.save(employeeModel1);
+   }
+
+   public void saveEmployee(EmployeeModel employeeModel){
+      employeeRepository.save(employeeModel);
+   }
+
+   public void deleteEmployeeById(String id){
+        
+      employeeRepository.deleteEmployeeById(id);
+   }
 
     public CustomerModel updateCustomer(String customerId, CustomerModel customerModel){
                
@@ -44,7 +67,13 @@ public class EmployeeService {
         customerRepository.save(customerModel);
         return customerModel;
      }
-
+     public String updateCustomerById(String customerId,CustomerModel customerModel){
+      
+      CustomerModel customerModel1 = customerRepository.findByCustomerId(customerId);
+      customerModel1.setMobileNumber(customerModel.getMobileNumber());
+      customerRepository.save(customerModel1);
+      return "Success";
+   }
      public RouteModel addRoutes(RouteModel routeModel){
         routeRepository.save(routeModel);
         return routeModel;

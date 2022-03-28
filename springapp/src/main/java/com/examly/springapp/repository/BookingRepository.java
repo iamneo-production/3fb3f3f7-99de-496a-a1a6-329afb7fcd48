@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.*;
 import java.util.*;
 
 @Repository
-public interface RouteRepository extends JpaRepository<RouteModel,Long> {
+public interface BookingRepository extends JpaRepository<BookingModel,Long> {
 
-    List<RouteModel> findAll(); 
-    RouteModel findByRouteId(String id);
-    RouteModel deleteRouteByRouteId(String id);
-    RouteModel findByStartPoint(String startPoint);
+    List<BookingModel> findAll(); 
+    BookingModel findByBookingId(String id);
+    BookingModel findByStartPoint(String startPoint);
 }

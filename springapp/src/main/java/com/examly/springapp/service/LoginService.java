@@ -19,22 +19,21 @@ public class LoginService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<LoginModel> getAllUsers(String id){
-        System.out.println("id " + id);
-       return loginRepository.findById(id);
+    public List<LoginModel> getAllUsers(){
+       return loginRepository.findAll();
     }
 
-    public String verifyLogin(LoginModel loginModel){
+    public boolean verifyLogin(LoginModel loginModel){
         System.out.println("LoginModel{{}} " + loginModel);
         EmployeeModel employeeModel = employeeRepository.findByEmail(loginModel.getEmail());
         if(employeeModel.getEmail() == loginModel.getEmail()){
             if(employeeModel.getPassword() == loginModel.getPassword()){
-                return "Login Succesful";
+                return true;
             }  else {
-                return "email and password is mismatching";
+                return false;
             }
         } else {
-            return "please enter correct mail";
+            return false;
         }
     }
 }
