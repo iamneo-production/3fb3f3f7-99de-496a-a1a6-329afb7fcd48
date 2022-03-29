@@ -108,6 +108,16 @@ export default function Register() {
    
     return (
       <div className="form">
+         <div class="topnav">
+            <a href="./">Home</a>
+            <a class="active" href="./Login">Login</a>
+            <a href="./Register">Register</a>
+            {/* <a href="#myorder">Myorder</a> */}
+            <div class="topnav-right">
+              <a href="./logout">Logout</a>
+            </div>
+        </div>
+   
         <div>
           <h1>User Registration</h1>
         </div>
@@ -117,7 +127,6 @@ export default function Register() {
           {errorMessage()}
           {successMessage()}
         </div>
-   
         <form >
 
           {/* Labels and inputs for form data */}

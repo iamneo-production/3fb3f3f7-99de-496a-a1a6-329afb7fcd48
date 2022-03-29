@@ -22,10 +22,15 @@ public class CustomerService {
     }
 
     public boolean addCustomer(CustomerModel customerModel){
-      System.out.println(customerModel.getMobilenumber()); 
-      
+      System.out.println(customerModel.getMobilenumber());       
       try {
-         customerRepository.save(customerModel);
+         CustomerModel customerModel1 = customerRepository.findByEmail(customerModel.getEmail());
+         if(customerModel1!=null){
+            customerModel1.setMobilenumber(customerModel.getMobilenumber());
+            customerRepository.save(customerModel1);
+         } else {
+            customerRepository.save(customerModel);
+         }
          return true;
       } catch(Exception e ) {
          System.out.println(e.getStackTrace());
@@ -35,11 +40,14 @@ public class CustomerService {
     }
 
     public CustomerModel updateCustomer(String customerId, CustomerModel customerModel){
-               
-        customerRepository.save(customerModel);
-        customerRepository.findByCustomerId(customerId);
-        customerModel.setCustomerId(customerId);
-        customerRepository.save(customerModel);
+      CustomerModel customerModel1 = customerRepository.findByEmail(customerModel.getEmail());
+      if(customerModel1!=null){
+         customerModel1.setMobilenumber(customerModel.getMobilenumber());
+         customerRepository.save(customerModel1);
+      } else {
+         customerRepository.save(customerModel);
+      }
+   
         return customerModel;
      }
 

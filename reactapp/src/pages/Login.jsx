@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
+import './Home.css';
 // import InputField from '../UIComponents/InputField';
-import SubmitButton from '../UIComponents/SubmitButton';
 
 function Login() {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -26,9 +27,11 @@ function Login() {
       });
       let resJson = await res.json();
       if (res.status === 200) {
-        setEmail("");
-        setPassword("");
-        setMessage("Login Succesfull");
+        if(resJson == false) {
+          setMessage("User Not Found");
+        } else {
+          setMessage("Login Succesful");
+        }       
       } else {
         setMessage("Some error occured");
       }
@@ -38,6 +41,17 @@ function Login() {
   };
 
     return (
+      <div>
+         <div class="topnav">
+            <a href="./">Home</a>
+            <a class="active" href="./Login">Login</a>
+            <a href="./Register">Register</a>
+            {/* <a href="#myorder">Myorder</a> */}
+            <div class="topnav-right">
+              <a href="./logout">Logout</a>
+            </div>
+        </div>
+
       <div className='loginForm'>
         <form onSubmit={handleSubmit}>
         <div className='title'>Log In</div>
@@ -57,12 +71,13 @@ function Login() {
         />
         <div className='signuptext'>
           <text>New User? </text>
-          <button1> <a href="./SignUp">SignUp</a></button1>
+          <button1> <a href="./Register">Register</a></button1>
         </div>
         <button type="submit">Login</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
+      </div>
       </div>
     );
 }

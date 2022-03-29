@@ -38,11 +38,14 @@ public class EmployeeService {
   }
 
     public void addEmployee(EmployeeModel employeeModel){
-       employeeRepository.save(employeeModel);
+      EmployeeModel employeeModel1 =  employeeRepository.findEmployeeById(employeeModel.getEmail());
+      if(employeeModel1 == null) {
+         employeeRepository.save(employeeModel);
+      }
     }
 
     public void editEmployee(EmployeeModel employeeModel){
-      EmployeeModel employeeModel1 =  employeeRepository.findEmployeeById(employeeModel.getId());
+      EmployeeModel employeeModel1 =  employeeRepository.findEmployeeById(employeeModel.getEmail());
       employeeModel1.setMobileNumber(employeeModel.getMobileNumber());  
       employeeModel1.setVehicleModel(employeeModel.getVehicleModel());
       employeeModel1.setVehicleNumber(employeeModel.getVehicleNumber());

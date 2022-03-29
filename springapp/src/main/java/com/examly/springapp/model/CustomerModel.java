@@ -31,6 +31,9 @@ public class CustomerModel {
     @Column(name = "mobile_number")
     private Long mobilenumber;
 
+    @Column(name = "password")
+    private String password;
+
     public String getCustomerId() {
         return customerId;
     }
@@ -68,13 +71,24 @@ public class CustomerModel {
     public void setMobilenumber(Long mobilenumber) {
         this.mobilenumber = mobilenumber;
     }
-    public CustomerModel(Long id, String customerId, String username, boolean status, String email, Long mobilenumber) {
+    
+    public String getPassword() {
+        return password;
+    }
+   
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public CustomerModel(Long id, String customerId, String username, boolean status, String email, Long mobilenumber,
+            String password) {
         this.id = id;
         this.customerId = customerId;
         this.username = username;
         this.status = status;
         this.email = email;
         this.mobilenumber = mobilenumber;
+        this.password = password;
     }
    
     public CustomerModel(){

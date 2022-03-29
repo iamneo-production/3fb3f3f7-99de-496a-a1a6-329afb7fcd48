@@ -13,10 +13,12 @@ public class LoginService {
    
     private LoginRepository loginRepository;
     private EmployeeRepository employeeRepository;
+    private CustomerRepository customerRepository;
 
-    public LoginService(LoginRepository loginRepository,EmployeeRepository employeeRepository){
+    public LoginService(LoginRepository loginRepository,EmployeeRepository employeeRepository,CustomerRepository customerRepository){
         this.loginRepository = loginRepository;
         this.employeeRepository = employeeRepository;
+        this.customerRepository = customerRepository;
     }
 
     public List<LoginModel> getAllUsers(){
@@ -24,20 +26,31 @@ public class LoginService {
     }
 
     public boolean verifyLogin(LoginModel loginModel){
-        System.out.println("LoginModel{{}} " + loginModel.getEmail());
-        System.out.println("LoginModel{{}} " + loginModel.getPassword());
         EmployeeModel employeeModel = employeeRepository.findByEmail(loginModel.getEmail());
+        CustomerModel customerModel = customerRepository.findByEmail(loginModel.getEmail());
+      
         if(employeeModel!=null){
-            if(employeeModel.getEmail() == loginModel.getEmail()){
-                if(employeeModel.getPassword() == loginModel.getPassword()){
+            if(employeeModel.getEmail().equals(loginModel.getEmail())){
+                if(employeeModel.getPassword().equals(loginModel.getPassword())){
                     return true;
                 }  else {
                     return false;
                 }
             } else {
                 return false; }
-        } else {
-            System.out.println("Employee not found");
+        } else if(customerModel!=null) {
+            if(customerModel.getEmail().equals(loginModel.getEmail())){
+                if(customerModel.getPassword().equals(loginModel.getPassword())){
+                    return true;
+                }  else {
+                    return false;
+                }
+            } else {
+                return false; 
+            }
+        }
+        else {
+            System.out.println("User not found");
             return false;
         }
       
