@@ -21,7 +21,9 @@ public class CustomerService {
         this.routeRepository = routeRepository;
     }
 
-    public boolean addCustomer(CustomerModel customerModel){        
+    public boolean addCustomer(CustomerModel customerModel){
+      System.out.println(customerModel.getMobilenumber()); 
+      
       try {
          customerRepository.save(customerModel);
          return true;

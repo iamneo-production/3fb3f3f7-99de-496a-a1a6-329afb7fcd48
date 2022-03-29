@@ -20,16 +20,16 @@ public class CustomerModel {
     private String customerId;
 
     @Column(name = "customer_name")
-    private String customerName;
+    private String username;
 
     @Column(name = "status")
     private boolean status;
 
     @Column(name = "email_id")
-    private String emailId;
+    private String email;
 
     @Column(name = "mobile_number")
-    private Long mobileNumber;
+    private Long mobilenumber;
 
     public String getCustomerId() {
         return customerId;
@@ -37,36 +37,49 @@ public class CustomerModel {
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
-    public String getCustomerName() {
-        return customerName;
-    }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
+   
     public boolean isStatus() {
         return status;
     }
     public void setStatus(boolean status) {
         this.status = status;
     }
-    public String getEmailId() {
-        return emailId;
+    public Long getId() {
+        return id;
     }
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setId(Long id) {
+        this.id = id;
     }
-    public Long getMobileNumber() {
-        return mobileNumber;
+    public String getUsername() {
+        return username;
     }
-    public void setMobileNumber(Long mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setUsername(String username) {
+        this.username = username;
     }
-    public CustomerModel(String customerId, String customerName, boolean status, String emailId, Long mobileNumber) {
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public Long getMobilenumber() {
+        return mobilenumber;
+    }
+    public void setMobilenumber(Long mobilenumber) {
+        this.mobilenumber = mobilenumber;
+    }
+    public CustomerModel(Long id, String customerId, String username, boolean status, String email, Long mobilenumber) {
+        this.id = id;
         this.customerId = customerId;
-        this.customerName = customerName;
+        this.username = username;
         this.status = status;
-        this.emailId = emailId;
-        this.mobileNumber = mobileNumber;
+        this.email = email;
+        this.mobilenumber = mobilenumber;
     }
+   
+    public CustomerModel(){
+        
+    }
+    
        
 }

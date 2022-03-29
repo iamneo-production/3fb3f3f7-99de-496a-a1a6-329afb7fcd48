@@ -28,7 +28,7 @@ function Login() {
       if (res.status === 200) {
         setEmail("");
         setPassword("");
-        setMessage("User created successfully");
+        setMessage("Login Succesfull");
       } else {
         setMessage("Some error occured");
       }

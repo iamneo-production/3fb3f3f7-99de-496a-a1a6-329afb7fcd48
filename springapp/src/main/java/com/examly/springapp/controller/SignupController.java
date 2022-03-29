@@ -30,6 +30,7 @@ public class SignupController {
         this.customerService = customerService;
     }
   
+    @CrossOrigin
     @PostMapping("/signup")
     public boolean signUpCustomer(@RequestBody CustomerModel customerModel){
         System.out.println("i am customer");

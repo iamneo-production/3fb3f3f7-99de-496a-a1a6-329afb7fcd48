@@ -12,7 +12,7 @@ public interface CustomerRepository extends JpaRepository<CustomerModel,Long> {
 
     List<CustomerModel> findAll(); 
     CustomerModel findByCustomerId(String id);
-    CustomerModel findByEmailId(String email);
+    CustomerModel findByEmail(String email);
     // CustomerModel save(CustomerModel customerModel);
 
 }

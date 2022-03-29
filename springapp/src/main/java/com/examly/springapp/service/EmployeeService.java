@@ -70,7 +70,7 @@ public class EmployeeService {
      public String updateCustomerById(String customerId,CustomerModel customerModel){
       
       CustomerModel customerModel1 = customerRepository.findByCustomerId(customerId);
-      customerModel1.setMobileNumber(customerModel.getMobileNumber());
+      customerModel1.setMobilenumber(customerModel.getMobilenumber());
       customerRepository.save(customerModel1);
       return "Success";
    }

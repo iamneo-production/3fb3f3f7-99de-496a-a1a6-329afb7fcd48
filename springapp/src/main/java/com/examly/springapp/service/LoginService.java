@@ -24,16 +24,22 @@ public class LoginService {
     }
 
     public boolean verifyLogin(LoginModel loginModel){
-        System.out.println("LoginModel{{}} " + loginModel);
+        System.out.println("LoginModel{{}} " + loginModel.getEmail());
+        System.out.println("LoginModel{{}} " + loginModel.getPassword());
         EmployeeModel employeeModel = employeeRepository.findByEmail(loginModel.getEmail());
-        if(employeeModel.getEmail() == loginModel.getEmail()){
-            if(employeeModel.getPassword() == loginModel.getPassword()){
-                return true;
-            }  else {
-                return false;
-            }
+        if(employeeModel!=null){
+            if(employeeModel.getEmail() == loginModel.getEmail()){
+                if(employeeModel.getPassword() == loginModel.getPassword()){
+                    return true;
+                }  else {
+                    return false;
+                }
+            } else {
+                return false; }
         } else {
+            System.out.println("Employee not found");
             return false;
         }
+      
     }
 }
