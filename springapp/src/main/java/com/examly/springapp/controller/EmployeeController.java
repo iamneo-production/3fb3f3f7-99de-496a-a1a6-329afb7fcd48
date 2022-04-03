@@ -30,6 +30,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
   
+    @CrossOrigin
     @GetMapping("/admin")
     public List<EmployeeModel> getEmployeeDetails(){
         System.out.println("hi i am employee");
@@ -38,10 +39,17 @@ public class EmployeeController {
 
     
     @GetMapping("/admin/getEmployee")
-    public EmployeeModel getEmployeeById(@RequestParam(defaultValue = "1" ) String email ){
+    public List<EmployeeModel> getEmployeeById(){
+        return employeeService.getAllEmployees();
+    }
+
+    @CrossOrigin
+    @GetMapping("/admin/employeeDetails")
+    public EmployeeModel getEmployeeDetailsById(@RequestParam(defaultValue = "1" ) String email ){
         System.out.println("hi i am employee by id");
         return employeeService.getEmployeeById(email);
     }
+
 
     @PutMapping("/admin/editEmployee")
     public void editEmployeeById(@RequestBody EmployeeModel employeeModel){

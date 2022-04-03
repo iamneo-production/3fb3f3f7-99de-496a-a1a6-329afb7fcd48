@@ -1,13 +1,12 @@
 import './Home.css';
 import React  from 'react';
 import Profile from './Profile';
-import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom';
+import {BrowserRouter as Router,Route,Routes,Link,useLocation,useNavigate} from 'react-router-dom';
 
-function Home () {
-  const search = window.location.search; // returns the URL query String
-  const params = new URLSearchParams(search); 
-  let email = params.get('email'); 
-  console.log(email)
+function Home (props) {
+  let navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state);  
   return (
  <div>
 <div class="topnav">
@@ -22,16 +21,12 @@ function Home () {
   <div class="topnav-right">
     <a class="active" href="./Home">Home</a>
     {/* <a href ="./Profile"> Profile */}
-    <Link   to={
-       {     
-         pathname: '/profile',
-         state: email
-        }
-       }> 
+
+    <Link to="/profile" state={{ email: state }}>
     Profile   
     </Link>
     {/* </a> */}
-    <a href="./feedback">Feedback</a> 
+    <a href="./Feedback">Feedback</a> 
     <a href="./">Logout</a>
   </div>
 </div>

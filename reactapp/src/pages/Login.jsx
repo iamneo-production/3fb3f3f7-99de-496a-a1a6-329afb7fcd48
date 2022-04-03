@@ -1,17 +1,24 @@
 import React,{useState} from 'react';
+import { useNavigate } from "react-router-dom";
+
 import './Home.css';
 
-function Login() {
+function Login(){
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  let navigate = useNavigate();
 
   const myHeaders = new Headers({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'https://8080-deacebeebfccecfccdceceefcbafdfb.examlyiopb.examly.io/',
     'Access-Control-Allow-Methods' : 'OPTIONS, DELETE, POST, GET, PATCH, PUT'
   });
+
+  function handleClick() {
+    navigate("/Home",{ state: email});
+  }
 
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,10 +34,9 @@ function Login() {
       let resJson = await res.json();
       if (res.status === 200) {
         if(resJson === false) {
-          // window.location.href = "./Home"; 
           setMessage("User Not Found/ Incorrect Password");
         } else {
-          window.location.href = "./Home?email=" + email; 
+          handleClick();
           setMessage("Login Succesful");
         }       
       } else {
