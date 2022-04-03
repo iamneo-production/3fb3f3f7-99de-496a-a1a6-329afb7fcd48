@@ -1,30 +1,47 @@
 import './Home.css';
-import React from 'react';
-// import { useForm } from "react-hook-form";
+import React  from 'react';
+import Profile from './Profile';
+import {BrowserRouter as Router,Route,Routes,Link} from 'react-router-dom';
 
-const Home =() => {
-
+function Home () {
+  const search = window.location.search; // returns the URL query String
+  const params = new URLSearchParams(search); 
+  let email = params.get('email'); 
+  console.log(email)
   return (
-    // <div>
-    //   <h1>Home</h1>
-    // </div>
  <div>
 <div class="topnav">
-  <a class="active" href="./Home">Home</a>
-  <a href="./Login">Login</a>
-  <a href="./Register">Register</a> 
-  <center>Car Pool is fun</center> 
-
+  <div>
+    <center>Car Pool is fun</center> 
+  </div>
+  <div class="topnav-left">
+    <label> RIDE-SHARING </label>
+  </div>
+  {/* <a href="./Login">Login</a> */}
+  {/* <a href="./Register">Register</a>  */}
   <div class="topnav-right">
-  <a href="./feedback">Feedback</a>
-    <a href="./logout">Logout</a>
+    <a class="active" href="./Home">Home</a>
+    {/* <a href ="./Profile"> Profile */}
+    <Link   to={
+       {     
+         pathname: '/profile',
+         state: email
+        }
+       }> 
+    Profile   
+    </Link>
+    {/* </a> */}
+    <a href="./feedback">Feedback</a> 
+    <a href="./">Logout</a>
   </div>
 </div>
 <div class="homeScreen">
-<h1> WELCOME TO YOUR RIDE APP</h1>
+
+<h1> WELCOME TO YOUR RIDE APP </h1>
+
 <h3>Save nature by sharing your car</h3>
 <h4>Share daily, Save more</h4>
-<img src ="/images/car.PNG" alt=""/>
+{/* <img src ="/images/car.PNG" alt=""/> */}
 </div>
 </div>
   );

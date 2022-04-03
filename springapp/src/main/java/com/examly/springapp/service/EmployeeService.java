@@ -21,15 +21,9 @@ public class EmployeeService {
         this.routeRepository = routeRepository;
     }
 
-    public EmployeeModel getEmployeeById(String id){
-        System.out.println("id " + id);
-       EmployeeModel employeeModel = new EmployeeModel() ;
-       employeeModel.setId("1");
-       employeeModel.setUserName("user");
-
-       employeeRepository.save(employeeModel);
-       employeeRepository.findEmployeeById(id);
-       return employeeModel;
+    public EmployeeModel getEmployeeById(String email){
+        System.out.println("id " + email);
+        return  employeeRepository.findByEmail(email);
     }
 
     public List<EmployeeModel> getAllEmployees(){
@@ -37,11 +31,15 @@ public class EmployeeService {
      return employeeRepository.findAll(); 
   }
 
-    public void addEmployee(EmployeeModel employeeModel){
-      EmployeeModel employeeModel1 =  employeeRepository.findEmployeeById(employeeModel.getEmail());
+    public boolean addEmployee(EmployeeModel employeeModel){
+      EmployeeModel employeeModel1 =  employeeRepository.findByEmail(employeeModel.getEmail());
       if(employeeModel1 == null) {
          employeeRepository.save(employeeModel);
       }
+      else {
+         return false;
+      }
+      return true;
     }
 
     public void editEmployee(EmployeeModel employeeModel){

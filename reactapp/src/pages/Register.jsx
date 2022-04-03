@@ -8,11 +8,13 @@ export default function Register() {
     'Access-Control-Allow-Methods' : 'OPTIONS, DELETE, POST, GET, PATCH, PUT'
   });
     // States for registration
-    const [username, setUserName] = useState('');
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [mobilenumber, setMobileNumber] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [active, setActive] = useState('');
     const [message, setMessage] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState('');
    
     // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
@@ -41,6 +43,16 @@ export default function Register() {
         setMobileNumber(e.target.value);
         setSubmitted(false);
       };
+        // Handling the Confirmpassword change
+    const handleConfirmPassword = (e) => {
+      setConfirmPassword(e.target.value);
+      if(password === confirmpassword){
+        setSubmitted(false);
+      }  else {
+            setSubmitted(false);
+            setError(true);
+          }
+    };
     // Handling the form submission
     // const handleSubmit = (e) => {
     //   e.preventDefault();
@@ -61,17 +73,21 @@ export default function Register() {
             headers: myHeaders,
             method: "POST",
             body: JSON.stringify({   
-              username:username,     
+              userName:userName,     
               email: email,
               password: password,
-              mobilenumber: mobilenumber
-            }),
+              mobileNumber: mobileNumber,
+              active : true
+           }),
           });
           let resJson = await res.json();
           if (res.status === 200) {  
-            setEmail("");
-            setPassword("");
-            setMessage("Login Succesfull");
+            if(resJson === false){
+              setMessage("User Already Exists");
+            } else {
+              window.location.href = "./"; 
+              setMessage("Successfully Registered")
+            }
           } else {
             setMessage("Some error occured");
           }
@@ -88,7 +104,7 @@ export default function Register() {
           style={{
             display: submitted ? '' : 'none',
           }}>
-          <h1>User {username} successfully registered!!</h1>
+          <h1>User {userName} successfully registered!!</h1>
         </div>
       );
     };
@@ -109,17 +125,10 @@ export default function Register() {
     return (
       <div className="form">
          <div class="topnav">
-            <a href="./">Home</a>
-            <a class="active" href="./Login">Login</a>
-            <a href="./Register">Register</a>
+            
+            <a href="./">Login</a>
+            <a class = "active" href="./Register">Register</a>
             {/* <a href="#myorder">Myorder</a> */}
-            <div class="topnav-right">
-              <a href="./logout">Logout</a>
-            </div>
-        </div>
-   
-        <div>
-          <h1>User Registration</h1>
         </div>
    
         {/* Calling to the methods */}
@@ -129,26 +138,47 @@ export default function Register() {
         </div>
         <form >
 
+        <div className='loginForm'>
+        <div className='title'>Register </div>
           {/* Labels and inputs for form data */}
+          <div className = 'inputField'>
           <label className="label">User Name</label>
-          <input onChange={handleName} className="input"
-            value={username} type="text" />
-
+          <input onChange={handleName} className="input" id = 'username'
+            value={userName} type="text" />
+          </div>
+          <div className = 'inputField'>
           <label className="label">Mobile Number</label>
-          <input onChange={handleMobileNumber} className="input"
-            value={mobilenumber} type="text" />  
-   
+          <input onChange={handleMobileNumber} className="input" id = 'mobileNumber'
+            value={mobileNumber} type="text" />  
+          </div>
+          <div className = 'inputField'>
           <label className="label">Email</label>
-          <input onChange={handleEmail} className="input"
+          <input onChange={handleEmail} className="input" id = 'email'
             value={email} type="email" />
-   
+          </div>
+          <div className = 'inputField'>
           <label className="label">Password</label>
-          <input onChange={handlePassword} className="input"
+          <input onChange={handlePassword} className="input" id = 'password'
             value={password} type="password" />
-   
-          <button onClick={handleSubmit} className="btn" type="submit">
+          </div>
+          <div className = 'inputField'>
+          <label className="label">Confirm Password</label>
+          <input onChange={handleConfirmPassword} className="input" id = 'confirmPassword'
+            value={confirmpassword} type="password" />
+          </div>
+            <div className='signuptext'>
+              <text>Already a User? </text>
+              <button1 id = 'signinLink'> <a href="./">Log In</a></button1>
+            </div>   
+          <div>
+            <div>
+          <button id = 'loginButton' onClick={handleSubmit} className="btn" type="submit">
             Sign Up
           </button>
+          </div>
+          <div className="message">{message ? <p>{message}</p> : null}</div>
+          </div>
+          </div>
         </form>
       </div>
     );

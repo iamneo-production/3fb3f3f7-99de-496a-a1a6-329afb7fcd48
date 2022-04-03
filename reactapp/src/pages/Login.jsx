@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import './Home.css';
-// import InputField from '../UIComponents/InputField';
 
 function Login() {
   
@@ -27,9 +26,11 @@ function Login() {
       });
       let resJson = await res.json();
       if (res.status === 200) {
-        if(resJson == false) {
-          setMessage("User Not Found");
+        if(resJson === false) {
+          // window.location.href = "./Home"; 
+          setMessage("User Not Found/ Incorrect Password");
         } else {
+          window.location.href = "./Home?email=" + email; 
           setMessage("Login Succesful");
         }       
       } else {
@@ -43,38 +44,40 @@ function Login() {
     return (
       <div>
          <div class="topnav">
-            <a href="./">Home</a>
+          
             <a class="active" href="./Login">Login</a>
-            <a href="./Register">Register</a>
+            {/* <a href="./Register">Register</a> */}
             {/* <a href="#myorder">Myorder</a> */}
-            <div class="topnav-right">
-              <a href="./logout">Logout</a>
-            </div>
+            
         </div>
 
       <div className='loginForm'>
         <form onSubmit={handleSubmit}>
-        <div className='title'>Log In</div>
-        <input
+        <div className='title'>Ride Log In</div>
+        <div  className = 'inputField'>
+         <input className='input'
           type='text'
           id='email'
           value={email}
           placeholder="Enter Email"
           onChange={(e) => setEmail(e.target.value)} 
         />
-        <input
-          type='password'
+        </div>
+        <div  className = 'inputField'>
+         <input className='input'          type='password'
           id='password'
           placeholder='Enter Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)} 
         />
+        </div>
         <div className='signuptext'>
           <text>New User? </text>
-          <button1> <a href="./Register">Register</a></button1>
+          <button1 id = 'signuplink'> <a href="./Register">Register</a></button1>
+        </div> 
+        <div className='submitButton'>
+        <button type="submit" id = 'loginButton' className='btn'>Log In</button>
         </div>
-        <button type="submit">Login</button>
-
         <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
       </div>

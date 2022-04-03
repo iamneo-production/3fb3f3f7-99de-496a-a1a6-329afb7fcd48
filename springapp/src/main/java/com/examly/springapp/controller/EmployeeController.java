@@ -38,9 +38,9 @@ public class EmployeeController {
 
     
     @GetMapping("/admin/getEmployee")
-    public EmployeeModel getEmployeeById(@RequestParam(defaultValue = "1" ) String id ){
+    public EmployeeModel getEmployeeById(@RequestParam(defaultValue = "1" ) String email ){
         System.out.println("hi i am employee by id");
-        return employeeService.getEmployeeById(id);
+        return employeeService.getEmployeeById(email);
     }
 
     @PutMapping("/admin/editEmployee")

@@ -3,13 +3,13 @@
   }
   
   body{
-  background-image: url('https://unsplash.com/photos/a_5DTTj_zm4');
+  background-image: url('./carsharing.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   }
   .topnav {
-    background-color: #e1f0113f;
+    /* background-color: #e1f0113f; */
     overflow: hidden;
   }
   
@@ -22,6 +22,12 @@
     text-decoration: none;
     font-size: 17px;
   }
+
+  .topnav label {
+    padding: 14px 16px;
+    color: #2e05e6d0;
+    font-size: 17px;
+  }
   
   /* Change the color of links on hover */
   .topnav a:hover {
@@ -32,11 +38,15 @@
   /* Add a color to the active/current link */
   .topnav a.active {
     background-color: #Black;
-    color: Green;
+    color: Black;
   }
 
   .topnav-right {
     float: right;
+  }
+
+  .topnav-left {
+    float: left;
   }
 
   .homeScreen {

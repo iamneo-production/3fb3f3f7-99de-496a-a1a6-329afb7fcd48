@@ -24,16 +24,16 @@ import java.util.*;
 // @ResponseBody
 public class SignupController {
 
-    private CustomerService customerService;
+    private EmployeeService employeeService;
 
-    public SignupController(CustomerService customerService){
-        this.customerService = customerService;
+    public SignupController(EmployeeService employeeService){
+        this.employeeService = employeeService;
     }
   
     @CrossOrigin
     @PostMapping("/signup")
-    public boolean signUpCustomer(@RequestBody CustomerModel customerModel){
-        System.out.println("i am customer");
-           return customerService.addCustomer(customerModel);
+    public boolean signUpCustomer(@RequestBody EmployeeModel employeeModel){
+        System.out.println("i am employee");
+           return employeeService. addEmployee(employeeModel);
     }
 }
