@@ -1,14 +1,13 @@
 import './Home.css';
 import React ,{useState}from 'react';
-import { useParams,useLocation } from "react-router-dom";
+import { useParams,useLocation,Link,useNavigate } from "react-router-dom";
 
 function Profile (props) { 
   const [setMessage] = useState("");
   // const employee = {id: "", userName : ""};
   const [employee, setEmployee] = useState({});
   const { state } = useLocation();
-  const email = state.email;
-  console.log(state.email);  
+  const email = state!==null ? state.email: employee.email;
 
   const myHeaders = new Headers({
     'Content-Type': 'application/json',
@@ -53,9 +52,18 @@ function Profile (props) {
         {/* <a href="./Register">Register</a>  */}
 
       <div class="topnav-right">
-      <a href="./Home">Home</a>
-      <a  class="active" href="./Profile">Profile</a>
-      <a href="./Feedback">Feedback</a>
+      <Link to="/Home" state={{ email: email.email }}>
+         Home   
+      </Link>
+     <Link to="/Profile" state={{ email: email }}>
+         Profile   
+      </Link>
+      <Link to="/RoutePage" state={{ email: state }}>
+      Route   
+      </Link> 
+    <Link to="/Feedback" state={{ email: state }}>
+    Feedback   
+    </Link> 
       <a href="./">Logout</a>
       </div>
     </div>

@@ -6,6 +6,9 @@ import {BrowserRouter as Router,Route,Routes,Link,useLocation,useNavigate} from 
 function Home (props) {
   let navigate = useNavigate();
   const { state } = useLocation();
+  if(state==Object){
+  state = state.email;
+  }
   console.log(state);  
   return (
  <div>
@@ -16,18 +19,20 @@ function Home (props) {
   <div class="topnav-left">
     <label> RIDE-SHARING </label>
   </div>
-  {/* <a href="./Login">Login</a> */}
-  {/* <a href="./Register">Register</a>  */}
+
   <div class="topnav-right">
     <a class="active" href="./Home">Home</a>
-    {/* <a href ="./Profile"> Profile */}
-
     <Link to="/profile" state={{ email: state }}>
     Profile   
     </Link>
-    {/* </a> */}
-    <a href="./Feedback">Feedback</a> 
-    <a href="./">Logout</a>
+    <a href = '/RoutePage'> Route </a>
+    {/* <Link to="/RoutePage" state={{ email: state }}>
+    Route   
+    </Link>  */}
+    <Link to="/Feedback" state={{ email: state }}>
+    Feedback   
+    </Link> 
+   <a href="./">Logout</a>
   </div>
 </div>
 <div class="homeScreen">

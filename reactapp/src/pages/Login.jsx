@@ -52,7 +52,7 @@ function Login(){
          <div class="topnav">
           
             <a class="active" href="./Login">Login</a>
-            {/* <a href="./Register">Register</a> */}
+            {/* <a href="./``````Register">Register</a> */}
             {/* <a href="#myorder">Myorder</a> */}
             
         </div>
@@ -63,7 +63,7 @@ function Login(){
         <div  className = 'inputField'>
          <input className='input'
           type='text'
-          id='email'
+          id='email1'
           value={email}
           placeholder="Enter Email"
           onChange={(e) => setEmail(e.target.value)} 
@@ -79,10 +79,10 @@ function Login(){
         </div>
         <div className='signuptext'>
           <text>New User? </text>
-          <button1 id = 'signuplink'> <a href="./Register">Register</a></button1>
+          <button1 id = 'signupLink'> <a href="./Register">Register</a></button1>
         </div> 
         <div className='submitButton'>
-        <button type="submit" id = 'loginButton' className='btn'>Log In</button>
+        <button type="submit" id = 'loginox' className='btn'>Log In</button>
         </div>
         <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>

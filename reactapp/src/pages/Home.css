@@ -16,7 +16,7 @@
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;
-    color: #2e05e6d0;
+    color: #0527e6d0;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -37,8 +37,8 @@
   
   /* Add a color to the active/current link */
   .topnav a.active {
-    background-color: #Black;
-    color: Black;
+    background-color: rgba(red, green, blue, alpha);
+    color: rgb((18, 212, 238)0, 0, 0);
   }
 
   .topnav-right {

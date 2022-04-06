@@ -1,8 +1,110 @@
 import React ,{useState}from 'react';
-// import './Feedback.css';
+import { useParams,useLocation,Link,useNavigate } from "react-router-dom";
+import './Feedback.css';
 
-function Feedback() {
-  
+function Feedback(props) {
+  const { state } = useLocation();
+  const email1 = state.email;
+  console.log(email1);
+
+  const myHeaders = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'https://8080-deacebeebfccecfccdceceefcbafdfb.examlyiopb.examly.io/',
+    'Access-Control-Allow-Methods' : 'OPTIONS, DELETE, POST, GET, PATCH, PUT'
+  });
+    // States for registration
+    const [fname, setfName] = useState('');
+    const [email, setEmail] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [suggestions, setSuggestions] = useState('');
+    const [complaints, setComplaints] = useState('');
+    const [message, setMessage] = useState("");
+   
+    // States for checking the errors
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
+    // Handling the name change
+    const handleName = (e) => {
+      setfName(e.target.value);
+      setSubmitted(false);
+    };
+   
+    // Handling the email change
+    const handleEmail = (e) => {
+      setEmail(e.target.value);
+      setSubmitted(false);
+    };
+   
+     // Handling the mobilenumber change
+     const handleMobileNumber = (e) => {
+        setMobileNumber(e.target.value);
+        setSubmitted(false);
+      };
+
+      const handleSuggestions = (e) => {
+        setSuggestions(e.target.value);
+        setSubmitted(false);
+      };
+
+      const handleComplaints = (e) => {
+        setComplaints(e.target.value);
+        setSubmitted(false);
+      };
+    
+
+    let handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        let res = await fetch("https://8080-deacebeebfccecfccdceceefcbafdfb.examlyiopb.examly.io/saveFeedback",  {
+          headers: myHeaders,
+          method: "POST",
+          body: JSON.stringify({   
+            name:fname,     
+            email: email,
+            mobileNumber: mobileNumber,
+            suggestions : suggestions,
+            complaints : complaints
+         }),
+        });
+        // let resJson = await res.json();
+        if (res.status === 200) {  
+          alert('Feedback Submitted')
+        } else {
+          setMessage("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+ 
+  // Showing success message
+  const successMessage = () => {
+    return (
+      <div
+        className="success"
+        style={{
+          display: submitted ? '' : 'none',
+        }}>
+      </div>
+    );
+  };
+ 
+  // Showing error message if error is true
+  const errorMessage = () => {
+    return (
+      <div
+        className="error"
+        style={{
+          display: error ? '' : 'none',
+        }}>
+        <h1>Please enter all the fields</h1>
+      </div>
+    );
+  };
+
+
+
   return(
   <div class="topnav">
       <div>
@@ -12,13 +114,22 @@ function Feedback() {
           <label> RIDE-SHARING </label>
       </div>
       <div class="topnav-right">
-      <a href="./Home">Home</a>
-      <a  class="active" href="./Profile">Profile</a>
-      <a href="./Feedback">Feedback</a>
-      <a href="./">Logout</a>
+      <Link to="/Home" state={{ email: email }}>
+         Home   
+      </Link>    
+       {/* <a href = './Profile'> Profile </a> */}
+     <Link to="/profile" state={{ email: email }}>
+         Profile   
+      </Link>     
+      <Link to="/RoutePage" state={{ email: state }}>
+    Route   
+    </Link> 
+    <Link to="/Feedback" state={{ email: state }}>
+    Feedback   
+    </Link> 
+       <a href="./">Logout</a>
       </div>
 
-<h2>FEED BACK FORM</h2>    
 <div class="container">    
   <form>    
     <div class="row">    
@@ -26,7 +137,7 @@ function Feedback() {
         <label for="fname">Name</label>    
       </div>    
       <div class="col-75">    
-        <input type="text" id="fname" name="firstname" placeholder="Your Name.."/>    
+        <input  className="input"  type="text" id="fname"  value={fname} onChange={handleName} name="firstname" placeholder="Your Name.."/>    
       </div>    
     </div>    
     <div class="row">    
@@ -34,36 +145,40 @@ function Feedback() {
         <label for="lname">Mobile Number</label>    
       </div>    
       <div class="col-75">    
-        <input type="text" id="lname" name="Mobile Number" placeholder="Mobile Number"/>    
+        <input type="text" id="lname" value={mobileNumber} name="Mobile Number" onChange={handleMobileNumber} placeholder="Mobile Number"/>    
       </div>    
     </div>    
     <div class="row">    
         <div class="col-25">    
-          <label for="email">Mail Id</label>    
+          <label for="email\
+          
+          ">Mail Id</label>    
         </div>    
         <div class="col-75">    
-          <input type="email" id="email" name="mailid" placeholder="Your mail id.."/>    
+          <input type="email1" id="email1" onChange={handleEmail} name="mailid" value={email} placeholder="Your mail id.."/>    
         </div>    
     </div>    
     <div class="row">    
       <div class="col-25">    
         <label for="feed_back">Suggestions</label>    
       </div>    
-      <div class="col-75">    
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>    
+      <div class="col-45">    
+        <textarea id="subject" name="subject" onChange={handleSuggestions} value={suggestions} placeholder="Write something.."  onfocus="this.blur()"></textarea>    
       </div>    
     </div>    
    <div class="row">    
       <div class="col-25">    
         <label for="feed_back">Complaints</label>    
       </div>    
-      <div class="col-75">    
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>    
+      <div class="col-45">    
+        <textarea id="complaints" name="subject" onChange={handleComplaints} value={complaints} placeholder="Write something.." onfocus="this.blur()"></textarea>    
       </div>    
     </div>    
-    <div class="row">    
-      <input type="submit" value="Submit"/>    
-    </div>    
+    <div  class="row">
+          <button id = 'Submit' onClick={handleSubmit} className="btn" type="submit">
+           Submit
+          </button>
+  </div>
   </form>    
   </div>    
   </div>
